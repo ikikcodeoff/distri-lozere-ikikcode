@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Administration - RapidMarket</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="app.js" defer></script>
+</head>
+<body onload="verifierConnexionAdmin()">
+  <header>
+    <img src="logo.png" alt="RapidMarket" class="logo">
+    <h1>Administration RapidMarket</h1>
+    <button onclick="deconnexionAdmin()" class="btn-deconnexion">Déconnexion</button>
+  </header>
+
+  <main>
+    <section id="login-section" class="card">
+      <h2>Connexion administrateur</h2>
+      <input type="email" id="admin-email" placeholder="Adresse e-mail">
+      <input type="password" id="admin-password" placeholder="Mot de passe">
+      <button onclick="connexionAdmin()">Se connecter</button>
+    </section>
+
+    <section id="admin-dashboard" class="hidden">
+      <h2>Liste des commandes</h2>
+      <div id="liste-commandes" class="liste"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Propulsé par <img src="logo2.png" class="mini-logo"> iKikCode & <img src="logo3.png" class="mini-logo"> Supabase</p>
+  </footer>
+</body>
+</html>

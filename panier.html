@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panier - RapidMarket</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="RapidMarket" class="logo">
+    <nav>
+      <a href="produits.html">Produits</a>
+      <a href="panier.html" class="active">Panier</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Votre Panier</h1>
+    <div id="cart-items"></div>
+    <div class="cart-summary">
+      <p>Total : <span id="cart-total">0.00 €</span></p>
+      <a href="commande.html" class="btn">Passer à la commande</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>Propulsé par <img src="logo2.png" alt="iKikCode" class="footer-logo"> & <img src="logo3.png" alt="Supabase" class="footer-logo"></p>
+  </footer>
+</body>
+</html>

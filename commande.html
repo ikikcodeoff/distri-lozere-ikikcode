@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commande - RapidMarket</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="RapidMarket" class="logo">
+  </header>
+
+  <main>
+    <h1>Finaliser votre commande</h1>
+
+    <form id="order-form">
+      <input type="text" id="name" placeholder="Nom complet" required>
+      <input type="tel" id="phone" placeholder="Téléphone" required>
+      <input type="text" id="address" placeholder="Adresse de livraison" required>
+      <button type="submit" class="btn">Payer avec Stripe</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>Propulsé par <img src="logo2.png" alt="iKikCode" class="footer-logo"> & <img src="logo3.png" alt="Supabase" class="footer-logo"></p>
+  </footer>
+</body>
+</html>

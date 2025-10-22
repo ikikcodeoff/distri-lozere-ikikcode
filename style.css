@@ -1,0 +1,270 @@
+/* =============================
+   STYLE GLOBAL — RAPID MARKET
+   ============================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+:root {
+  --vert: #bacc12;
+  --gris: #f7f7f7;
+  --noir: #111;
+  --gris-fonce: #77746f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+  color: var(--noir);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* =============================
+   HEADER
+   ============================= */
+header {
+  background-color: #fff;
+  border-bottom: 2px solid var(--vert);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 60px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+header .logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+header img {
+  height: 45px;
+  cursor: pointer;
+}
+
+nav {
+  display: flex;
+  gap: 30px;
+}
+
+nav a {
+  color: var(--noir);
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: var(--vert);
+}
+
+/* =============================
+   PRODUITS
+   ============================= */
+.produits-container {
+  max-width: 1300px;
+  margin: 60px auto;
+  padding: 0 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 35px;
+}
+
+.produit {
+  background-color: var(--gris);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: 0.3s;
+  text-align: center;
+}
+
+.produit:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.produit img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.produit h3 {
+  font-size: 1.1rem;
+  color: var(--noir);
+}
+
+.produit p {
+  color: var(--gris-fonce);
+  font-size: 0.95rem;
+  margin: 8px 0;
+}
+
+.produit .prix {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+button {
+  background: var(--vert);
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #a7b60f;
+}
+
+/* =============================
+   PANIER
+   ============================= */
+.panier {
+  width: 90%;
+  max-width: 900px;
+  margin: 60px auto;
+  background: var(--gris);
+  border-radius: 14px;
+  padding: 30px;
+}
+
+.panier-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.total {
+  text-align: right;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+/* =============================
+   FORMULAIRE DE COMMANDE
+   ============================= */
+form {
+  max-width: 500px;
+  margin: 60px auto;
+  background: var(--gris);
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+input:focus {
+  outline: 2px solid var(--vert);
+}
+
+/* =============================
+   PAGE ADMIN
+   ============================= */
+.admin-container {
+  width: 90%;
+  max-width: 800px;
+  margin: 60px auto;
+  background: var(--gris);
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+}
+
+.login-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  width: 350px;
+  margin: 80px auto;
+}
+
+.login-card input {
+  margin-bottom: 15px;
+  padding: 10px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.login-card button {
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+/* =============================
+   PAGE MERCI
+   ============================= */
+.merci {
+  text-align: center;
+  margin: auto;
+  padding: 100px 20px;
+}
+
+.merci h1 {
+  font-size: 2rem;
+  color: var(--vert);
+}
+
+.merci p {
+  margin-top: 15px;
+  font-size: 1.1rem;
+}
+
+/* =============================
+   FOOTER
+   ============================= */
+footer {
+  margin-top: auto;
+  background-color: var(--gris);
+  padding: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--gris-fonce);
+  border-top: 1px solid #eee;
+}
+
+footer img {
+  height: 20px;
+  vertical-align: middle;
+  margin: 0 6px;
+}
