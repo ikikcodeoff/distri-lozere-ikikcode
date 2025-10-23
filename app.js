@@ -1,9 +1,9 @@
 // app.js
+// Charger Supabase depuis le CDN global (pas en module)
 const SUPABASE_URL = "https://jgtmrlrohszuhtppisud.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpndG1ybHJvaHN6dWh0cHBpc3VkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA4ODQ3NTUsImV4cCI6MjA3NjQ2MDc1NX0._Z9vQL55O3tLL2seJVa1l3Wwy5Er8-p-hWb7y_sJ3go";
 
-const { createClient } = supabase;
-const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // ----------- PAGE PRODUITS -----------
 async function afficherProduits() {
@@ -13,7 +13,8 @@ async function afficherProduits() {
     return;
   }
 
-  const container = document.getElementById("liste-produits");
+  const container = document.getElementById("product-list");
+  if (!container) return;
   container.innerHTML = "";
 
   produits.forEach((p) => {
@@ -41,43 +42,16 @@ function ajouterAuPanier(id, nom, prix) {
   alert(`${nom} ajouté au panier.`);
 }
 
-function afficherPanier() {
-  const panier = JSON.parse(localStorage.getItem("panier")) || [];
-  const container = document.getElementById("contenu-panier");
-  container.innerHTML = "";
-
-  let total = 0;
-
-  panier.forEach((item, index) => {
-    total += item.prix * item.quantite;
-    const ligne = document.createElement("div");
-    ligne.classList.add("ligne-panier");
-    ligne.innerHTML = `
-      <span>${item.nom} (${item.quantite})</span>
-      <span>${item.prix * item.quantite} €</span>
-      <button onclick="supprimerDuPanier(${index})">X</button>
-    `;
-    container.appendChild(ligne);
-  });
-
-  document.getElementById("total-panier").innerText = total.toFixed(2) + " €";
-}
-
-function supprimerDuPanier(index) {
-  let panier = JSON.parse(localStorage.getItem("panier")) || [];
-  panier.splice(index, 1);
-  localStorage.setItem("panier", JSON.stringify(panier));
-  afficherPanier();
-}
-
 // ----------- COMMANDE -----------
 async function validerCommande() {
   const panier = JSON.parse(localStorage.getItem("panier")) || [];
   if (panier.length === 0) return alert("Panier vide !");
-  
+
+  const total = panier.reduce((t, i) => t + i.prix * i.quantite, 0);
+
   const { data, error } = await supabaseClient
     .from("orders")
-    .insert([{ total: panier.reduce((t, i) => t + i.prix * i.quantite, 0) }])
+    .insert([{ total }])
     .select();
 
   if (error) {
@@ -97,28 +71,7 @@ async function validerCommande() {
   window.location.href = "merci.html";
 }
 
-// ----------- ADMIN -----------
-async function connexionAdmin() {
-  const email = document.getElementById("admin-email").value;
-  const motdepasse = document.getElementById("admin-password").value;
-
-  if (email === "admin@rapidmarket.fr" && motdepasse === "admin123") {
-    localStorage.setItem("admin", "connecté");
-    window.location.href = "admin.html";
-  } else {
-    alert("Email ou mot de passe incorrect");
-  }
-}
-
-async function afficherCommandes() {
-  const { data, error } = await supabaseClient.from("orders").select("*");
-  const container = document.getElementById("liste-commandes");
-  container.innerHTML = "";
-
-  data.forEach((cmd) => {
-    const div = document.createElement("div");
-    div.classList.add("commande");
-    div.innerHTML = `<p>Commande #${cmd.id} — Total : ${cmd.total} €</p>`;
-    container.appendChild(div);
-  });
-}
+// ----------- LANCEMENT AUTO -----------
+document.addEventListener("DOMContentLoaded", () => {
+  if (document.getElementById("product-list")) afficherProduits();
+});
