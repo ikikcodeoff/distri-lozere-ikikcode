@@ -2,19 +2,19 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Administration - RapidMarket</title>
+  <title>Administration — RapidMarket</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-  <script src="app.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+  <script src="admin.js" defer></script>
 </head>
-<body onload="verifierConnexionAdmin()">
+<body>
   <header>
     <img src="logo.png" alt="RapidMarket" class="logo">
-    <h1>Administration RapidMarket</h1>
-    <button onclick="deconnexionAdmin()" class="btn-deconnexion">Déconnexion</button>
+    <h1>Espace Administration</h1>
   </header>
 
   <main>
+    <!-- Section de connexion -->
     <section id="login-section" class="card">
       <h2>Connexion administrateur</h2>
       <input type="email" id="admin-email" placeholder="Adresse e-mail">
@@ -22,14 +22,27 @@
       <button onclick="connexionAdmin()">Se connecter</button>
     </section>
 
+    <!-- Tableau de bord admin -->
     <section id="admin-dashboard" class="hidden">
-      <h2>Liste des commandes</h2>
-      <div id="liste-commandes" class="liste"></div>
+      <button onclick="deconnexionAdmin()" class="btn-deconnexion">Déconnexion</button>
+      <h2>Produits en base</h2>
+      <div id="liste-produits" class="liste"></div>
+
+      <h3>Ajouter un produit</h3>
+      <input type="text" id="nom-produit" placeholder="Nom">
+      <input type="text" id="description-produit" placeholder="Description">
+      <input type="number" id="prix-produit" placeholder="Prix (€)">
+      <input type="text" id="image-produit" placeholder="URL image">
+      <button onclick="ajouterProduit()">Ajouter</button>
     </section>
   </main>
 
   <footer>
-    <p>Propulsé par <img src="logo2.png" class="mini-logo"> iKikCode & <img src="logo3.png" class="mini-logo"> Supabase</p>
+    <p>Propulsé par 
+      <img src="logo2.png" alt="iKikCode" class="mini-logo"> iKikCode & 
+      <img src="logo3.png" alt="Supabase" class="mini-logo"> Supabase
+    </p>
   </footer>
 </body>
 </html>
+
