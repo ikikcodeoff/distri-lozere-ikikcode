@@ -3,30 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Produits - RapidMarket</title>
+  <title>Produits — RapidMarket</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <script type="module" src="app.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
 </head>
+
 <body>
-  <header>
-    <img src="logo.png" alt="RapidMarket" class="logo">
-    <nav>
-      <a href="produits.html">Produits</a>
-      <a href="panier.html">Panier</a>
-      <a href="admin.html">Admin</a>
-    </nav>
+  <header class="header">
+    <img src="logo.png" alt="RapidMarket" class="logo" />
+    <h1>Produits RapidMarket</h1>
   </header>
 
-  <main>
-    <h1>Nos Produits</h1>
-    <input type="text" id="search" placeholder="Rechercher un produit...">
+  <main class="container">
+    <section class="filters">
+      <input type="text" id="searchInput" placeholder="Rechercher un produit..." class="search-bar" />
 
-    <div id="product-list" class="product-grid"></div>
+      <select id="categoryFilter" class="filter-select">
+        <option value="">Toutes les catégories</option>
+        <option value="Fruits">Fruits</option>
+        <option value="Légumes">Légumes</option>
+        <option value="Boissons">Boissons</option>
+        <option value="Snacks">Snacks</option>
+      </select>
+    </section>
+
+    <section id="productList" class="product-grid">
+      <!-- Les produits seront affichés ici -->
+    </section>
   </main>
 
-  <footer>
-    <p>Propulsé par <img src="logo2.png" alt="iKikCode" class="footer-logo"> & <img src="logo3.png" alt="Supabase" class="footer-logo"></p>
+  <footer class="footer">
+    <img src="logo2.png" alt="IkiKCode" class="logo-small" />
+    <img src="logo3.png" alt="Supabase" class="logo-small" />
+    <p>Développé par <strong>IkiKCode</strong> — Plateforme RapidMarket</p>
   </footer>
+
+  <!-- ✅ SDK Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- ✅ Script principal -->
+  <script src="app.js"></script>
 </body>
 </html>
