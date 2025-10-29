@@ -1,94 +1,75 @@
-// Initialisation Supabase
+// admin.js
 const SUPABASE_URL = "https://jgtmrlrohszuhtppisud.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpndG1ybHJvaHN6dWh0cHBpc3VkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA4ODQ3NTUsImV4cCI6MjA3NjQ2MDc1NX0._Z9vQL55O3tLL2seJVa1l3Wwy5Er8-p-hWb7y_sJ3go";
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// Connexion admin
-function connexionAdmin() {
-  const email = document.getElementById("admin-email").value;
-  const password = document.getElementById("admin-password").value;
+const btnLogin = document.getElementById('btnLogin');
+const panel = document.getElementById('panel');
+const loginBox = document.getElementById('loginBox');
+const tbody = document.querySelector('#productsTable tbody');
 
-  if (email === "admin@rapidmarket.fr" && password === "admin123") {
-    localStorage.setItem("adminConnecte", "true");
-    document.getElementById("login-section").classList.add("hidden");
-    document.getElementById("admin-dashboard").classList.remove("hidden");
-    chargerProduits();
+btnLogin && btnLogin.addEventListener('click', async ()=>{
+  const email = document.getElementById('adminEmail').value;
+  const pass = document.getElementById('adminPassword').value;
+  // simple local check (replace with real auth later)
+  if(email === 'admin@rapidmarket.fr' && pass === 'admin123'){
+    loginBox.style.display = 'none';
+    panel.style.display = 'block';
+    loadProductsAdmin();
   } else {
-    alert("Identifiants incorrects !");
+    alert('Identifiants incorrects');
   }
-}
+});
 
-// Déconnexion
-function deconnexionAdmin() {
-  localStorage.removeItem("adminConnecte");
-  document.getElementById("admin-dashboard").classList.add("hidden");
-  document.getElementById("login-section").classList.remove("hidden");
-}
+document.getElementById('btnAdd') && document.getElementById('btnAdd').addEventListener('click', async ()=>{
+  const nom = document.getElementById('newName').value.trim();
+  const prix = parseFloat(document.getElementById('newPrice').value || 0);
+  const stock = parseInt(document.getElementById('newStock').value || 0,10);
+  const cat = document.getElementById('newCat').value.trim();
+  const img = document.getElementById('newImg').value.trim();
 
-// Charger produits
-async function chargerProduits() {
-  const { data, error } = await supabaseClient.from("produits").select("*");
-  const liste = document.getElementById("liste-produits");
-  liste.innerHTML = "";
+  if(!nom) return alert('Nom requis');
+  const { error } = await supabaseClient.from('produits').insert([{ nom, prix, stock, categorie:cat, image_url:img }]);
+  if(error) return alert('Erreur ajout produit');
+  document.getElementById('newName').value='';document.getElementById('newPrice').value='';document.getElementById('newStock').value='';document.getElementById('newCat').value='';document.getElementById('newImg').value='';
+  loadProductsAdmin();
+});
 
-  if (error) {
-    console.error(error);
-    liste.innerHTML = "<p>Erreur de chargement.</p>";
-    return;
-  }
-
-  data.forEach((p) => {
-    const div = document.createElement("div");
-    div.classList.add("produit-admin");
-    div.innerHTML = `
-      <strong>${p.nom}</strong> - ${p.prix} €<br>
-      <em>${p.description}</em><br>
-      <img src="${p.image_url || 'placeholder.png'}" alt="${p.nom}" style="height:60px"><br>
-      <button onclick="supprimerProduit(${p.id})">🗑 Supprimer</button>
+async function loadProductsAdmin(){
+  const { data, error } = await supabaseClient.from('produits').select('*').order('id', {ascending:true});
+  if(error){ console.error(error); tbody.innerHTML = '<tr><td colspan=6>Erreur</td></tr>'; return; }
+  tbody.innerHTML='';
+  data.forEach(p=>{
+    const s = (p.stock <=0) ? 'En rupture' : (p.stock < 5 ? 'Bientôt en rupture' : 'En stock');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${escapeHtml(p.nom)}</td>
+      <td>${(p.prix||0).toFixed(2)}</td>
+      <td><input style="width:80px" type="number" id="stock_${p.id}" value="${p.stock||0}"></td>
+      <td>${escapeHtml(p.categorie||'')}</td>
+      <td>${s}</td>
+      <td>
+        <button class="btn-ghost" onclick="updateStock(${p.id})">💾</button>
+        <button class="btn-ghost" onclick="deleteProd(${p.id})">🗑️</button>
+      </td>
     `;
-    liste.appendChild(div);
+    tbody.appendChild(tr);
   });
 }
 
-// Ajouter un produit
-async function ajouterProduit() {
-  const nom = document.getElementById("nom-produit").value;
-  const description = document.getElementById("description-produit").value;
-  const prix = parseFloat(document.getElementById("prix-produit").value);
-  const image_url = document.getElementById("image-produit").value;
-
-  if (!nom || !description || isNaN(prix)) {
-    alert("Veuillez remplir tous les champs !");
-    return;
-  }
-
-  const { error } = await supabaseClient.from("produits").insert([
-    { nom, description, prix, image_url }
-  ]);
-
-  if (error) {
-    alert("Erreur d’ajout du produit.");
-    console.error(error);
-  } else {
-    alert("Produit ajouté !");
-    chargerProduits();
-  }
-}
-
-// Supprimer un produit
-async function supprimerProduit(id) {
-  if (!confirm("Supprimer ce produit ?")) return;
-  const { error } = await supabaseClient.from("produits").delete().eq("id", id);
-  if (error) console.error(error);
-  chargerProduits();
-}
-
-// Vérifie la session au chargement
-window.onload = () => {
-  if (localStorage.getItem("adminConnecte") === "true") {
-    document.getElementById("login-section").classList.add("hidden");
-    document.getElementById("admin-dashboard").classList.remove("hidden");
-    chargerProduits();
-  }
+window.updateStock = async function(id){
+  const val = parseInt(document.getElementById('stock_'+id).value||0,10);
+  const { error } = await supabaseClient.from('produits').update({ stock: val }).eq('id', id);
+  if(error) return alert('Erreur mise à jour stock');
+  loadProductsAdmin();
 };
 
+window.deleteProd = async function(id){
+  if(!confirm('Supprimer ce produit ?')) return;
+  const { error } = await supabaseClient.from('produits').delete().eq('id', id);
+  if(error) return alert('Erreur suppression');
+  loadProductsAdmin();
+};
+
+/* reuse escapeHtml from app.js logic (simple) */
+function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g, (m)=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
