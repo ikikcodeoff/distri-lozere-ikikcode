@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Produits — RapidMarket</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
-</head>
-
-<body>
-  <header class="header">
-    <img src="logo.png" alt="RapidMarket" class="logo" />
-    <h1>Produits RapidMarket</h1>
-  </header>
-
-  <main class="container">
-    <section class="filters">
-      <input type="text" id="searchInput" placeholder="Rechercher un produit..." class="search-bar" />
-
-      <select id="categoryFilter" class="filter-select">
-        <option value="">Toutes les catégories</option>
-        <option value="Fruits">Fruits</option>
-        <option value="Légumes">Légumes</option>
-        <option value="Boissons">Boissons</option>
-        <option value="Snacks">Snacks</option>
-      </select>
-    </section>
-
-    <section id="productList" class="product-grid">
-      <!-- Les produits seront affichés ici -->
-    </section>
-  </main>
-
-  <footer class="footer">
-    <img src="logo2.png" alt="IkiKCode" class="logo-small" />
-    <img src="logo3.png" alt="Supabase" class="logo-small" />
-    <p>Développé par <strong>IkiKCode</strong> — Plateforme RapidMarket</p>
-  </footer>
-
-  <!-- ✅ SDK Supabase -->
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <!-- ✅ Script principal -->
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="brand">
+        <img src="logo.png" class="logo" alt="RapidMarket">
+        <h1>RapidMarket</h1>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Accueil</a>
+        <a href="produits.html">Produits</a>
+        <a href="panier.html">Panier</a>
+        <a href="admin.html">Admin</a>
+      </nav>
+    </header>
+
+    <section>
+      <div class="filters">
+        <div class="search">
+          <input id="searchInput" type="search" placeholder="🔍 Rechercher un produit...">
+        </div>
+        <div class="filters-right">
+          <select id="categoryFilter" class="select">
+            <option value="">Toutes les catégories</option>
+          </select>
+          <a href="panier.html" class="btn">Voir panier</a>
+        </div>
+      </div>
+
+      <div id="productList" class="grid"></div>
+    </section>
+
+    <div class="footer">© 2025 RapidMarket — propulsé par <strong>iKikCode</strong></div>
+  </div>
+
   <script src="app.js"></script>
 </body>
 </html>
