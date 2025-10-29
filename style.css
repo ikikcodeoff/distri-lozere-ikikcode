@@ -1,270 +1,106 @@
-/* =============================
-   STYLE GLOBAL — RAPID MARKET
-   ============================= */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+/* style.css — RapidMarket / IkiKCode look (blanc + accent #bacb09) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-:root {
-  --vert: #bacc12;
-  --gris: #f7f7f7;
-  --noir: #111;
-  --gris-fonce: #77746f;
+:root{
+  --accent: #bacb09;
+  --muted: #77746f;
+  --bg: #ffffff;
+  --card: #fbfbfb;
+  --text: #111;
+  --radius: 12px;
+  --shadow: 0 6px 22px rgba(16,24,40,0.06);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font-family:'Poppins',system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.container{max-width:1100px;margin:28px auto;padding:0 20px}
+
+/* Header */
+.header{
+  display:flex;align-items:center;justify-content:space-between;padding:18px 0;
+}
+.brand{
+  display:flex;gap:14px;align-items:center;
+}
+.brand img.logo{height:46px;border-radius:8px}
+.brand h1{font-size:20px;margin:0;font-weight:700;color:var(--text)}
+.nav a{margin-left:16px;font-weight:600;color:var(--muted)}
+
+/* Hero / index */
+.hero{
+  background:linear-gradient(180deg, #fff 0%, #f7f8f9 100%);border-radius:16px;padding:28px;box-shadow:var(--shadow);display:flex;gap:28px;align-items:center;
+}
+.hero-left{flex:1}
+.hero-right{width:300px;text-align:center}
+.hero h2{margin:0 0 8px 0;font-size:22px}
+
+/* Filters */
+.filters{display:flex;gap:12px;align-items:center;margin:18px 0;justify-content:space-between}
+.search{
+  display:flex;gap:8px;align-items:center;flex:1;
+}
+.search input{
+  width:100%;padding:12px 14px;border-radius:10px;border:1px solid #e8e8e8;background:var(--card)
+}
+.select, .btn{
+  padding:10px 14px;border-radius:10px;border:1px solid #e8e8e8;background:var(--card)
+}
+.filters-right{display:flex;gap:12px;align-items:center}
+
+/* Products grid */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:18px;
+}
+.card{
+  background:var(--card);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;
+}
+.card img{width:100%;height:160px;object-fit:cover;border-radius:8px}
+.card h3{margin:0;font-size:16px}
+.card p{margin:0;color:var(--muted);font-size:13px}
+.actions{display:flex;gap:8px;align-items:center;margin-top:auto}
+.btn-primary{
+  background:var(--accent);color:#fff;border:none;padding:10px 12px;border-radius:10px;font-weight:700;cursor:pointer;
+}
+.btn-ghost{background:transparent;border:1px solid #e6e6e6;color:var(--muted);padding:10px 12px;border-radius:10px;cursor:pointer}
+
+/* Stock labels */
+.stock{font-weight:700;font-size:13px}
+.stock.en-stock{color:#2ecc71}
+.stock.bientot{color:#f39c12}
+.stock.rupture{color:#e74c3c}
+
+/* Panier page */
+.cart-panel{display:flex;gap:24px;align-items:flex-start}
+.cart-items{flex:1}
+.cart-summary{width:360px;min-height:120px;border-radius:12px;padding:18px;background:var(--card);box-shadow:var(--shadow)}
+.cart-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #efefef}
+
+/* Form (commande) */
+.form{
+  background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow)
+}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+.form input{width:100%;padding:10px;border-radius:10px;border:1px solid #e6e6e6;background:white}
+
+/* Admin */
+.admin-panel{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow)}
+.table{width:100%;border-collapse:collapse}
+.table th,.table td{padding:10px;border-bottom:1px solid #eee;text-align:left}
+.small-muted{font-size:13px;color:var(--muted)}
+
+/* Footer */
+.footer{padding:24px 0;text-align:center;color:var(--muted);font-size:14px;margin-top:30px}
+
+/* Responsive */
+@media (max-width:900px){
+  .cart-panel{flex-direction:column}
+  .hero{flex-direction:column}
+  .filters{flex-direction:column;align-items:stretch}
+  .form .row{grid-template-columns:1fr}
 }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #fff;
-  color: var(--noir);
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
 
-/* =============================
-   HEADER
-   ============================= */
-header {
-  background-color: #fff;
-  border-bottom: 2px solid var(--vert);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 60px;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-header .logos {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-header img {
-  height: 45px;
-  cursor: pointer;
-}
-
-nav {
-  display: flex;
-  gap: 30px;
-}
-
-nav a {
-  color: var(--noir);
-  text-decoration: none;
-  font-weight: 500;
-  transition: 0.3s;
-}
-
-nav a:hover {
-  color: var(--vert);
-}
-
-/* =============================
-   PRODUITS
-   ============================= */
-.produits-container {
-  max-width: 1300px;
-  margin: 60px auto;
-  padding: 0 30px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 35px;
-}
-
-.produit {
-  background-color: var(--gris);
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  transition: 0.3s;
-  text-align: center;
-}
-
-.produit:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-}
-
-.produit img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
-
-.produit h3 {
-  font-size: 1.1rem;
-  color: var(--noir);
-}
-
-.produit p {
-  color: var(--gris-fonce);
-  font-size: 0.95rem;
-  margin: 8px 0;
-}
-
-.produit .prix {
-  font-weight: 600;
-  font-size: 1.1rem;
-  margin-top: 10px;
-}
-
-button {
-  background: var(--vert);
-  color: #000;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-button:hover {
-  background: #a7b60f;
-}
-
-/* =============================
-   PANIER
-   ============================= */
-.panier {
-  width: 90%;
-  max-width: 900px;
-  margin: 60px auto;
-  background: var(--gris);
-  border-radius: 14px;
-  padding: 30px;
-}
-
-.panier-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #fff;
-  margin-bottom: 15px;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-}
-
-.total {
-  text-align: right;
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-top: 20px;
-}
-
-/* =============================
-   FORMULAIRE DE COMMANDE
-   ============================= */
-form {
-  max-width: 500px;
-  margin: 60px auto;
-  background: var(--gris);
-  padding: 30px;
-  border-radius: 14px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-form h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-input, select {
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  font-size: 1rem;
-  margin-bottom: 15px;
-}
-
-input:focus {
-  outline: 2px solid var(--vert);
-}
-
-/* =============================
-   PAGE ADMIN
-   ============================= */
-.admin-container {
-  width: 90%;
-  max-width: 800px;
-  margin: 60px auto;
-  background: var(--gris);
-  border-radius: 16px;
-  padding: 30px;
-  text-align: center;
-}
-
-.login-card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 30px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-  width: 350px;
-  margin: 80px auto;
-}
-
-.login-card input {
-  margin-bottom: 15px;
-  padding: 10px;
-  width: 100%;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-.login-card button {
-  width: 100%;
-}
-
-.hidden {
-  display: none;
-}
-
-/* =============================
-   PAGE MERCI
-   ============================= */
-.merci {
-  text-align: center;
-  margin: auto;
-  padding: 100px 20px;
-}
-
-.merci h1 {
-  font-size: 2rem;
-  color: var(--vert);
-}
-
-.merci p {
-  margin-top: 15px;
-  font-size: 1.1rem;
-}
-
-/* =============================
-   FOOTER
-   ============================= */
-footer {
-  margin-top: auto;
-  background-color: var(--gris);
-  padding: 20px;
-  text-align: center;
-  font-size: 0.9rem;
-  color: var(--gris-fonce);
-  border-top: 1px solid #eee;
-}
-
-footer img {
-  height: 20px;
-  vertical-align: middle;
-  margin: 0 6px;
-}
