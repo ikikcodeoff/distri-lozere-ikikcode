@@ -1,32 +1,39 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panier - RapidMarket</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Panier — RapidMarket</title>
   <link rel="stylesheet" href="style.css">
-  <script type="module" src="app.js" defer></script>
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="RapidMarket" class="logo">
-    <nav>
-      <a href="produits.html">Produits</a>
-      <a href="panier.html" class="active">Panier</a>
-    </nav>
-  </header>
+  <div class="container">
+    <header class="header">
+      <div class="brand">
+        <img src="logo.png" class="logo" alt="RapidMarket"><h1>Panier</h1>
+      </div>
+      <nav class="nav"><a href="produits.html">Produits</a><a href="index.html">Accueil</a></nav>
+    </header>
 
-  <main>
-    <h1>Votre Panier</h1>
-    <div id="cart-items"></div>
-    <div class="cart-summary">
-      <p>Total : <span id="cart-total">0.00 €</span></p>
-      <a href="commande.html" class="btn">Passer à la commande</a>
-    </div>
-  </main>
+    <main>
+      <div class="cart-panel">
+        <div class="cart-items card" id="cartItems">
+          <!-- lignes du panier -->
+        </div>
+        <aside class="cart-summary">
+          <h3>Récapitulatif</h3>
+          <div id="summaryList"></div>
+          <p class="cart-row"><strong>Total</strong><strong id="cartTotal">0 €</strong></p>
+          <div style="margin-top:12px">
+            <a id="checkoutBtn" class="btn-primary" href="commande.html">Passer la commande</a>
+          </div>
+        </aside>
+      </div>
+    </main>
 
-  <footer>
-    <p>Propulsé par <img src="logo2.png" alt="iKikCode" class="footer-logo"> & <img src="logo3.png" alt="Supabase" class="footer-logo"></p>
-  </footer>
+    <div class="footer">© 2025 RapidMarket — iKikCode</div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
