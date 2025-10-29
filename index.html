@@ -1,46 +1,40 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Produits — RapidMarket</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RapidMarket — IkiKCode</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <header class="header">
-    <img src="logo.png" alt="RapidMarket" class="logo" />
-    <h1>Produits RapidMarket</h1>
-  </header>
+  <div class="container">
+    <header class="header">
+      <div class="brand">
+        <img src="logo.png" class="logo" alt="RapidMarket">
+        <h1>RapidMarket</h1>
+      </div>
+      <nav class="nav">
+        <a href="produits.html">Produits</a>
+        <a href="panier.html">Panier</a>
+        <a href="admin.html">Admin</a>
+      </nav>
+    </header>
 
-  <main class="container">
-    <section class="filters">
-      <input type="text" id="searchInput" placeholder="Rechercher un produit..." class="search-bar" />
-
-      <select id="categoryFilter" class="filter-select">
-        <option value="">Toutes les catégories</option>
-        <option value="Fruits">Fruits</option>
-        <option value="Légumes">Légumes</option>
-        <option value="Boissons">Boissons</option>
-        <option value="Snacks">Snacks</option>
-      </select>
+    <section class="hero">
+      <div class="hero-left">
+        <h2>RapidMarket — Distri Lozère</h2>
+        <p class="small-muted">Boutique en ligne • Livraison garantie 48H • Livraison gratuite à partir de 50€</p>
+        <div style="margin-top:14px">
+          <a class="btn-primary" href="produits.html">Voir les produits</a>
+        </div>
+        <p style="margin-top:18px" class="small-muted">Adresse : 4 Rue Alfred de Musset, 91120 Palaiseau • Tél : 01 64 47 52 86</p>
+      </div>
+      <div class="hero-right">
+        <img src="logo.png" alt="logo" style="max-width:100%;border-radius:10px">
+      </div>
     </section>
 
-    <section id="productList" class="product-grid">
-      <!-- Les produits seront affichés ici -->
-    </section>
-  </main>
-
-  <footer class="footer">
-    <img src="logo2.png" alt="IkiKCode" class="logo-small" />
-    <img src="logo3.png" alt="Supabase" class="logo-small" />
-    <p>Développé par <strong>IkiKCode</strong> — Plateforme RapidMarket</p>
-  </footer>
-
-  <!-- ✅ SDK Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <!-- ✅ Script principal -->
-  <script src="app.js"></script>
+    <div class="footer">© 2025 RapidMarket — propulsé par <strong>iKikCode</strong></div>
+  </div>
 </body>
 </html>
