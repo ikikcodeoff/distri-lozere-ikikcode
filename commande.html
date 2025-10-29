@@ -3,28 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Commande - RapidMarket</title>
+  <title>Commande — RapidMarket</title>
   <link rel="stylesheet" href="style.css">
-  <script type="module" src="app.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="RapidMarket" class="logo">
+    <h1>Finaliser ma commande</h1>
   </header>
 
-  <main>
-    <h1>Finaliser votre commande</h1>
+  <main class="checkout-container">
+    <!-- 🛍️ Résumé du panier -->
+    <section class="cart-summary">
+      <h2>Mon panier</h2>
+      <div id="cart-items"></div>
+      <p class="total">Total : <span id="cart-total">0 €</span></p>
+    </section>
 
-    <form id="order-form">
-      <input type="text" id="name" placeholder="Nom complet" required>
-      <input type="tel" id="phone" placeholder="Téléphone" required>
-      <input type="text" id="address" placeholder="Adresse de livraison" required>
-      <button type="submit" class="btn">Payer avec Stripe</button>
-    </form>
+    <!-- 💳 Formulaire client -->
+    <section class="checkout-form">
+      <h2>Informations de livraison</h2>
+      <form id="orderForm">
+        <div class="form-group">
+          <label>Prénom</label>
+          <input type="text" id="prenom" required>
+        </div>
+
+        <div class="form-group">
+          <label>Nom</label>
+          <input type="text" id="nom" required>
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" required>
+        </div>
+
+        <div class="form-group">
+          <label>Adresse</label>
+          <input type="text" id="adresse" required>
+        </div>
+
+        <div class="form-group">
+          <label>Ville</label>
+          <input type="text" id="ville" required>
+        </div>
+
+        <div class="form-group">
+          <label>Code postal</label>
+          <input type="text" id="cp" required>
+        </div>
+
+        <button type="submit" class="btn-validate">Valider ma commande</button>
+      </form>
+    </section>
   </main>
 
   <footer>
-    <p>Propulsé par <img src="logo2.png" alt="iKikCode" class="footer-logo"> & <img src="logo3.png" alt="Supabase" class="footer-logo"></p>
+    <p>© RapidMarket — propulsé par <b>IkiKCode</b></p>
   </footer>
+
+  <script src="commande.js"></script>
 </body>
 </html>
