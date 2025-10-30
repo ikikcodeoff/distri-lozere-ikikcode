@@ -158,5 +158,3 @@ document.addEventListener('DOMContentLoaded', ()=>{
   loadProductsPage();
   renderCartPage();
 });
-
-
