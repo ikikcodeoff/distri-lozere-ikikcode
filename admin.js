@@ -73,3 +73,4 @@ window.deleteProd = async function(id){
 
 /* reuse escapeHtml from app.js logic (simple) */
 function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g, (m)=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
+
