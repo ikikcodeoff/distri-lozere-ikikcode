@@ -1,48 +1,52 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Administration — RapidMarket</title>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin — RapidMarket</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
-  <script src="admin.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="RapidMarket" class="logo">
-    <h1>Espace Administration</h1>
-  </header>
+  <div class="container">
+    <header class="header">
+      <div class="brand"><img src="logo2.png" class="logo" alt="iKikCode"><h1>Admin — RapidMarket</h1></div>
+      <nav class="nav"><a href="produits.html">Boutique</a></nav>
+    </header>
 
-  <main>
-    <!-- Section de connexion -->
-    <section id="login-section" class="card">
-      <h2>Connexion administrateur</h2>
-      <input type="email" id="admin-email" placeholder="Adresse e-mail">
-      <input type="password" id="admin-password" placeholder="Mot de passe">
-      <button onclick="connexionAdmin()">Se connecter</button>
-    </section>
+    <main>
+      <section class="admin-panel">
+        <h2>Connexion administrateur</h2>
+        <div id="loginBox" style="display:flex;gap:8px;align-items:center">
+          <input id="adminEmail" placeholder="email administrateur" value="admin@rapidmarket.fr">
+          <input id="adminPassword" placeholder="mot de passe" type="password" value="admin123">
+          <button id="btnLogin" class="btn-primary">Se connecter</button>
+        </div>
 
-    <!-- Tableau de bord admin -->
-    <section id="admin-dashboard" class="hidden">
-      <button onclick="deconnexionAdmin()" class="btn-deconnexion">Déconnexion</button>
-      <h2>Produits en base</h2>
-      <div id="liste-produits" class="liste"></div>
+        <div id="panel" style="margin-top:18px;display:none">
+          <h2>Produits</h2>
 
-      <h3>Ajouter un produit</h3>
-      <input type="text" id="nom-produit" placeholder="Nom">
-      <input type="text" id="description-produit" placeholder="Description">
-      <input type="number" id="prix-produit" placeholder="Prix (€)">
-      <input type="text" id="image-produit" placeholder="URL image">
-      <button onclick="ajouterProduit()">Ajouter</button>
-    </section>
-  </main>
+          <div style="display:flex;gap:10px;margin-bottom:12px">
+            <input id="newName" placeholder="Nom">
+            <input id="newPrice" placeholder="Prix" type="number" step="0.01">
+            <input id="newStock" placeholder="Stock" type="number">
+            <input id="newCat" placeholder="Catégorie">
+            <input id="newImg" placeholder="Image URL">
+            <button id="btnAdd" class="btn-primary">Ajouter</button>
+          </div>
 
-  <footer>
-    <p>Propulsé par 
-      <img src="logo2.png" alt="iKikCode" class="mini-logo"> iKikCode & 
-      <img src="logo3.png" alt="Supabase" class="mini-logo"> Supabase
-    </p>
-  </footer>
+          <table class="table" id="productsTable">
+            <thead><tr><th>Nom</th><th>Prix</th><th>Stock</th><th>Catégorie</th><th>Statut</th><th>Actions</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <div class="footer">© 2025 RapidMarket — iKikCode</div>
+  </div>
+
+  <script src="admin.js"></script>
 </body>
 </html>
+
 
